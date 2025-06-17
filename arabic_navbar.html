@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpCodea</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            direction: rtl;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 4px solid #007bff;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* Logo Styles */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: #00d4ff;
+        }
+
+        /* Navigation Items */
+        .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex: 1;
+        }
+
+        /* Category Dropdown */
+        .category-dropdown {
+            position: relative;
+        }
+
+        .category-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border: 2px solid #007bff;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .category-btn:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border: 2px solid #007bff;
+            border-radius: 12px;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.5rem;
+            color: #333;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 123, 255, 0.1);
+            font-weight: 500;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            padding-left: 3rem;
+            border: 2px solid #007bff;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #007bff;
+        }
+
+        /* Right Side Items */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Language/Region Button */
+        .region-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #007bff;
+            color: #007bff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .region-btn:hover {
+            background: rgba(0, 123, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Login Button */
+        .login-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border: 2px solid #28a745;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #218838, #1e7e34);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            border: 3px solid #007bff;
+            box-shadow: 0 20px 60px rgba(0, 123, 255, 0.3);
+            transform: scale(0.9);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.show .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #007bff;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+
+        .save-btn:hover {
+            background: linear-gradient(135deg, #0056b3, #004085);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Content Area */
+        .content {
+            padding: 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .welcome-text {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: #00d4ff;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-items {
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>متجر الألعاب</span>
+            </a>
+
+            <!-- Navigation Items -->
+            <div class="nav-items">
+                <!-- Category Dropdown -->
+                <div class="category-dropdown">
+                    <button class="category-btn" id="categoryBtn">
+                        <span>الفئات</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu" id="categoryDropdown">
+                        <a href="#" class="dropdown-item">بطاقات الهدايا</a>
+                        <a href="#" class="dropdown-item">الألعاب</a>
+                        <a href="#" class="dropdown-item">البرامج والتطبيقات</a>
+                        <a href="#" class="dropdown-item">بطاقات الدفع</a>
+                        <a href="#" class="dropdown-item">رقم تيلكو</a>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="البحث عن المنتجات...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+
+            <!-- Right Side Items -->
+            <div class="nav-right">
+                <!-- Region/Language Button -->
+                <button class="region-btn" id="regionBtn">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">عربي</span>
+                </button>
+
+                <!-- Login Button -->
+                <a href="#" class="login-btn">
+                    <i class="fas fa-user"></i>
+                    <span>تسجيل الدخول</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Regional Settings Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">الإعدادات الإقليمية</h2>
+                <button class="close-btn" id="closeBtn">&times;</button>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">المنطقة</label>
+                <select class="form-select" id="regionSelect">
+                    <option value="global">عالمي</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">اللغة</label>
+                <select class="form-select" id="languageSelect">
+                    <option value="ar">العربية</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">العملة</label>
+                <select class="form-select" id="currencySelect">
+                    <option value="egp">جنيه مصري (EGP)</option>
+                    <option value="usd">دولار أمريكي (USD)</option>
+                    <option value="sar">ريال سعودي (SAR)</option>
+                    <option value="qar">ريال قطري (QAR)</option>
+                    <option value="aed">درهم إماراتي (AED)</option>
+                </select>
+            </div>
+
+            <button class="save-btn" id="saveBtn">حفظ الإعدادات</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="welcome-text">مرحباً بك في متجر الألعاب</h1>
+        <p class="subtitle">اكتشف أفضل الألعاب والبطاقات الرقمية</p>
+    </div>
+
+    <script>
+        // DOM Elements
+        const categoryBtn = document.getElementById('categoryBtn');
+        const categoryDropdown = document.getElementById('categoryDropdown');
+        const regionBtn = document.getElementById('regionBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const closeBtn = document.getElementById('closeBtn');
+        const saveBtn = document.getElementById('saveBtn');
+        const currentLang = document.getElementById('currentLang');
+        const languageSelect = document.getElementById('languageSelect');
+        const regionSelect = document.getElementById('regionSelect');
+        const currencySelect = document.getElementById('currencySelect');
+
+        // State Management
+        let appState = {
+            language: 'ar',
+            region: 'global',
+            currency: 'egp'
+        };
+
+        // Language Texts
+        const translations = {
+            ar: {
+                lang: 'عربي',
+                storeName: 'متجر الألعاب',
+                categories: 'الفئات',
+                searchPlaceholder: 'البحث عن المنتجات...',
+                login: 'تسجيل الدخول',
+                modalTitle: 'الإعدادات الإقليمية',
+                region: 'المنطقة',
+                language: 'اللغة',
+                currency: 'العملة',
+                save: 'حفظ الإعدادات',
+                welcome: 'مرحباً بك في متجر الألعاب',
+                subtitle: 'اكتشف أفضل الألعاب والبطاقات الرقمية',
+                giftCards: 'بطاقات الهدايا',
+                games: 'الألعاب',
+                software: 'البرامج والتطبيقات',
+                payment: 'بطاقات الدفع',
+                telco: 'رقم تيلكو'
+            },
+            en: {
+                lang: 'English',
+                storeName: 'Gaming Store',
+                categories: 'Categories',
+                searchPlaceholder: 'Search products...',
+                login: 'Login',
+                modalTitle: 'Regional Settings',
+                region: 'Region',
+                language: 'Language',
+                currency: 'Currency',
+                save: 'Save Settings',
+                welcome: 'Welcome to Gaming Store',
+                subtitle: 'Discover the best games and digital cards',
+                giftCards: 'Gift Cards',
+                games: 'Games',
+                software: 'Software & Apps',
+                payment: 'Payment Cards',
+                telco: 'Telco Pin'
+            }
+        };
+
+        // Category Dropdown Toggle
+        categoryBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            categoryDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!categoryBtn.contains(e.target) && !categoryDropdown.contains(e.target)) {
+                categoryDropdown.classList.remove('show');
+            }
+        });
+
+        // Modal Controls
+        regionBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('show');
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modalOverlay.classList.remove('show');
+        });
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.remove('show');
+            }
+        });
+
+        // Save Settings
+        saveBtn.addEventListener('click', () => {
+            appState.language = languageSelect.value;
+            appState.region = regionSelect.value;
+            appState.currency = currencySelect.value;
+            
+            updateLanguage();
+            modalOverlay.classList.remove('show');
+        });
+
+        // Update Language Function
+        function updateLanguage() {
+            const texts = translations[appState.language];
+            const isRTL = appState.language === 'ar';
+            
+            // Update HTML attributes
+            document.documentElement.lang = appState.language;
+            document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+            
+            // Update text content
+            currentLang.textContent = texts.lang;
+            document.querySelector('.logo span').textContent = texts.storeName;
+            document.querySelector('.category-btn span').textContent = texts.categories;
+            document.querySelector('.search-input').placeholder = texts.searchPlaceholder;
+            document.querySelector('.login-btn span').textContent = texts.login;
+            document.querySelector('.modal-title').textContent = texts.modalTitle;
+            document.querySelector('.welcome-text').textContent = texts.welcome;
+            document.querySelector('.subtitle').textContent = texts.subtitle;
+            document.querySelector('#saveBtn').textContent = texts.save;
+            
+            // Update form labels
+            const labels = document.querySelectorAll('.form-label');
+            labels[0].textContent = texts.region;
+            labels[1].textContent = texts.language;
+            labels[2].textContent = texts.currency;
+            
+            // Update dropdown items
+            const dropdownItems = document.querySelectorAll('.dropdown-item');
+            dropdownItems[0].textContent = texts.giftCards;
+            dropdownItems[1].textContent = texts.games;
+            dropdownItems[2].textContent = texts.software;
+            dropdownItems[3].textContent = texts.payment;
+            dropdownItems[4].textContent = texts.telco;
+            
+            // Update body class for RTL/LTR styling if needed
+            document.body.className = isRTL ? 'rtl' : 'ltr';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLanguage();
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                categoryDropdown.classList.remove('show');
+                modalOverlay.classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

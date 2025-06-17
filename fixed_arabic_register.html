@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد - متجر البطاقات الهدية</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: linear-gradient(135deg, #00AAFF 0%, #4A90E2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background decorative elements */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, rgba(25,110,247,0.1) 0%, rgba(25,110,247,0.05) 100%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .register-container {
+            position: relative;
+            z-index: 2;
+            max-width: 420px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .register-card {
+            background: rgba(247, 245, 245, 0.938);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .register-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00AAFF 0%, #4A90E2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 10px 25px rgba(25, 110, 247, 0.3);
+        }
+
+        .logo-icon i {
+            color: white;
+            font-size: 24px;
+        }
+
+        .welcome-title {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .welcome-subtitle {
+            color: #5a6c7d;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        /* Input wrapper to contain input and icon together */
+        .input-wrapper {
+            position: relative;
+            display: block;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 12px 15px 12px 45px;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            width: 100%;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: #00AAFF;
+            box-shadow: 0 0 0 3px rgba(25, 110, 247, 0.1);
+            outline: none;
+        }
+
+        .form-control.is-valid {
+            border-color: #28a745;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .form-control.is-valid:hover {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+
+        .form-control.is-invalid:hover {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .form-control:not(.is-valid):not(.is-invalid):hover {
+            border-color: #00AAFF;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .form-control::placeholder {
+            color: #95a5a6;
+            font-weight: 300;
+        }
+
+        /* Fixed icon positioning relative to input field only */
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            font-size: 16px;
+            pointer-events: none;
+            z-index: 5;
+            transition: color 0.3s ease;
+        }
+        
+        .form-control.is-valid + .input-icon {
+            color: #28a745;
+        }
+        
+        .form-control.is-invalid + .input-icon {
+            color: #dc3545;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            font-size: 16px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            z-index: 10;
+        }
+
+        .password-toggle:hover {
+            color: #00AAFF;
+        }
+
+        .password-toggle.active {
+            color: #00AAFF;
+        }
+
+        .phone-group {
+            display: flex;
+            gap: 10px;
+            position: relative;
+        }
+
+        .country-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 12px 15px;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a6c7d' d='M6 8.825L1.175 4 2.238 2.938 6 6.7l3.763-3.763L10.825 4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 15px center;
+            padding-left: 35px;
+        }
+
+        .country-select:focus {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-color: #00AAFF;
+            box-shadow: 0 0 0 3px rgba(25, 110, 247, 0.1);
+            outline: none;
+        }
+
+        .country-select:hover {
+            border-color: #00AAFF;
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .country-select option {
+            color: #2c3e50;
+            background: #ffffff;
+            padding: 8px;
+        }
+
+        /* Phone input wrapper for proper icon positioning */
+        .phone-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .phone-input {
+            padding: 12px 15px 12px 45px;
+            width: 100%;
+        }
+
+        /* Phone icon positioned relative to phone input wrapper */
+        .phone-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            font-size: 16px;
+            pointer-events: none;
+            z-index: 5;
+            transition: color 0.3s ease;
+        }
+        
+        .country-select.is-valid {
+            border-color: #28a745;
+        }
+        
+        .country-select.is-invalid {
+            border-color: #dc3545;
+        }
+        
+        .country-select.is-valid:hover {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.1);
+        }
+        
+        .country-select.is-invalid:hover {
+            border-color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+        
+        .phone-icon.is-valid {
+            color: #28a745;
+        }
+        
+        .phone-icon.is-invalid {
+            color: #dc3545;
+        }
+
+        .error-message {
+            display: none;
+            color: #dc3545;
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 400;
+            line-height: 1.5;
+            padding: 8px 12px;
+            background: rgba(220, 53, 69, 0.1);
+            border-radius: 8px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .error-message.show {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #00AAFF 0%, #4A90E2 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(25, 110, 247, 0.3);
+        }
+
+        .btn-register:hover {
+            background: linear-gradient(135deg, #1557c7 0%, #3d7bc6 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(25, 110, 247, 0.4);
+            color: white;
+        }
+
+        .btn-register:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+
+
+        .login-link {
+            text-align: center;
+            color: #5a6c7d;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #00AAFF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #1557c7;
+            text-decoration: underline;
+        }
+
+        /* Terms and Conditions Checkbox Styling */
+    
+
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+            margin-top: 0;
+            cursor: pointer;
+            border: 2px solid #95a5a6;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .form-check-input:checked {
+            background-color: #00AAFF;
+            border-color: #00AAFF;
+        }
+
+        .form-check-input:focus {
+            box-shadow: 0 0 0 3px rgba(25, 110, 247, 0.1);
+            border-color: #00AAFF;
+        }
+
+        .form-check-label {
+            font-size: 14px;
+            color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .terms-link {
+            color: #00AAFF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .terms-link:hover {
+            color: #1557c7;
+            text-decoration: underline;
+        }
+
+        /* Mobile Screens (up to 576px) */
+        @media (max-width: 575.98px) {
+            .container-fluid {
+                padding: 0;
+            }
+            .register-container {
+                max-width: 100%;
+                margin: 0 10px;
+            }
+
+            .register-card {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .welcome-title {
+                font-size: 20px;
+            }
+
+            .welcome-subtitle {
+                font-size: 13px;
+            }
+
+            .phone-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .country-select {
+                width: 100%;
+            }
+
+            .social-login {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            body::before,
+            body::after {
+                display: none;
+            }
+        }
+
+        /* Tablet/iPad Screens (576px to 991.98px) */
+        @media (min-width: 576px) and (max-width: 991.98px) {
+            .register-container {
+                max-width: 420px;
+            }
+
+            .register-card {
+                padding: 35px 30px;
+            }
+
+            .welcome-title {
+                font-size: 22px;
+            }
+
+            .phone-group {
+                gap: 12px;
+            }
+
+            .country-select {
+                width: 130px;
+            }
+        }
+
+        /* Desktop/Computer Screens (992px and up) */
+        @media (min-width: 992px) {
+            .register-container {
+                max-width: 420px;
+            }
+
+            .register-card {
+                padding: 40px 30px;
+            }
+
+            .welcome-title {
+                font-size: 24px;
+            }
+
+            .phone-group {
+                gap: 10px;
+            }
+
+            .country-select {
+                width: 120px;
+            }
+        }
+
+        /* Animation for page load */
+        /* Animations */
+        @keyframes pulsingShadow {
+            0% {
+                box-shadow: 
+                    0 0 30px rgba(0, 170, 255, 0.2),
+                    -20px 0 40px rgba(0, 170, 255, 0.1),
+                    20px 0 40px rgba(0, 170, 255, 0.1);
+            }
+            50% {
+                box-shadow: 
+                    0 0 50px rgba(0, 170, 255, 0.4),
+                    -40px 0 70px rgba(0, 170, 255, 0.2),
+                    40px 0 70px rgba(0, 170, 255, 0.2);
+            }
+            100% {
+                box-shadow: 
+                    0 0 30px rgba(0, 170, 255, 0.2),
+                    -20px 0 40px rgba(0, 170, 255, 0.1),
+                    20px 0 40px rgba(0, 170, 255, 0.1);
+            }
+        }
+
+        @keyframes glowingBorder {
+            0% {
+                border-color: rgba(0, 170, 255, 0.2);
+            }
+            50% {
+                border-color: rgba(0, 170, 255, 0.5);
+            }
+            100% {
+                border-color: rgba(0, 170, 255, 0.2);
+            }
+        }
+
+        .register-card {
+            animation: 
+                fadeInUp 0.6s ease-out,
+                pulsingShadow 3s ease-in-out infinite,
+                glowingBorder 3s ease-in-out infinite;
+            border: 2px solid rgba(0, 170, 255, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form row for name fields */
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        @media (max-width: 575.98px) {
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <div class="register-container">
+                    <div class="register-card">
+                        <!-- Logo Section -->
+                        <div class="logo-section">
+                            <div class="logo-icon">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h2 class="welcome-title">انضم إلينا الآن</h2>
+                            <p class="welcome-subtitle">أنشئ حسابك الجديد للاستمتاع بأفضل أسعار البطاقات </div>
+                        <!-- Register Form -->
+                        <form id="registerForm" novalidate>
+                            <!-- Name Fields -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="input-wrapper">
+                                        <input type="text" class="form-control" id="firstName" placeholder="الاسم الأول" required>
+                                        <i class="fas fa-user input-icon"></i>
+                                    </div>
+                                    <div class="error-message" id="firstNameError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-wrapper">
+                                        <input type="text" class="form-control" id="lastName" placeholder="اسم العائلة" required>
+                                        <i class="fas fa-user input-icon"></i>
+                                    </div>
+                                    <div class="error-message" id="lastNameError"></div>
+                                </div>
+                            </div>
+
+                            <!-- Password Fields -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <div class="input-wrapper">
+                                        <input type="password" class="form-control" id="password" placeholder="كلمة المرور" required>
+                                        <i class="fas fa-eye password-toggle" id="passwordToggle" title="إظهار كلمة المرور"></i>
+                                    </div>
+                                    <div class="error-message" id="passwordError"></div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-wrapper">
+                                        <input type="password" class="form-control" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+                                        <i class="fas fa-eye password-toggle" id="confirmPasswordToggle" title="إظهار كلمة المرور"></i>
+                                    </div>
+                                    <div class="error-message" id="confirmPasswordError"></div>
+                                </div>
+                            </div>
+
+                            <!-- Country Selection -->
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <select class="form-control" id="countryCode" required>
+                                        <option value="">اختر الدولة</option>
+                                        <option value="AF">🇦🇫 أفغانستان</option>
+                                        <option value="AL">🇦🇱 ألبانيا</option>
+                                        <option value="DZ">🇩🇿 الجزائر</option>
+                                        <option value="AD">🇦🇩 أندورا</option>
+                                        <option value="AO">🇦🇴 أنغولا</option>
+                                        <option value="AG">🇦🇬 أنتيغوا وبربودا</option>
+                                        <option value="AR">🇦🇷 الأرجنتين</option>
+                                        <option value="AM">🇦🇲 أرمينيا</option>
+                                        <option value="AU">🇦🇺 أستراليا</option>
+                                        <option value="AT">🇦🇹 النمسا</option>
+                                        <option value="AZ">🇦🇿 أذربيجان</option>
+                                        <option value="BS">🇧🇸 جزر البهاما</option>
+                                        <option value="BH">🇧🇭 البحرين</option>
+                                        <option value="BD">🇧🇩 بنغلاديش</option>
+                                        <option value="BB">🇧🇧 بربادوس</option>
+                                        <option value="BY">🇧🇾 بيلاروسيا</option>
+                                        <option value="BE">🇧🇪 بلجيكا</option>
+                                        <option value="BZ">🇧🇿 بليز</option>
+                                        <option value="BJ">🇧🇯 بنين</option>
+                                        <option value="BT">🇧🇹 بوتان</option>
+                                        <option value="BO">🇧🇴 بوليفيا</option>
+                                        <option value="BA">🇧🇦 البوسنة والهرسك</option>
+                                        <option value="BW">🇧🇼 بوتسوانا</option>
+                                        <option value="BR">🇧🇷 البرازيل</option>
+                                        <option value="BN">🇧🇳 بروناي</option>
+                                        <option value="BG">🇧🇬 بلغاريا</option>
+                                        <option value="BF">🇧🇫 بوركينا فاسو</option>
+                                        <option value="BI">🇧🇮 بوروندي</option>
+                                        <option value="KH">🇰🇭 كمبوديا</option>
+                                        <option value="CM">🇨🇲 الكاميرون</option>
+                                        <option value="CA">🇨🇦 كندا</option>
+                                        <option value="CV">🇨🇻 الرأس الأخضر</option>
+                                        <option value="CF">🇨🇫 جمهورية أفريقيا الوسطى</option>
+                                        <option value="TD">🇹🇩 تشاد</option>
+                                        <option value="CL">🇨🇱 تشيلي</option>
+                                        <option value="CN">🇨🇳 الصين</option>
+                                        <option value="CO">🇨🇴 كولومبيا</option>
+                                        <option value="KM">🇰🇲 جزر القمر</option>
+                                        <option value="CD">🇨🇩 جمهورية الكونغو الديمقراطية</option>
+                                        <option value="CG">🇨🇬 جمهورية الكونغو</option>
+                                        <option value="CR">🇨🇷 كوستاريكا</option>
+                                        <option value="HR">🇭🇷 كرواتيا</option>
+                                        <option value="CU">🇨🇺 كوبا</option>
+                                        <option value="CY">🇨🇾 قبرص</option>
+                                        <option value="CZ">🇨🇿 جمهورية التشيك</option>
+                                        <option value="DK">🇩🇰 الدنمارك</option>
+                                        <option value="DJ">🇩🇯 جيبوتي</option>
+                                        <option value="DM">🇩🇲 دومينيكا</option>
+                                        <option value="DO">🇩🇴 جمهورية الدومينيكان</option>
+                                        <option value="EC">🇪🇨 الإكوادور</option>
+                                        <option value="EG">🇪🇬 مصر</option>
+                                        <option value="SV">🇸🇻 السلفادور</option>
+                                        <option value="GQ">🇬🇶 غينيا الاستوائية</option>
+                                        <option value="ER">🇪🇷 إريتريا</option>
+                                        <option value="EE">🇪🇪 إستونيا</option>
+                                        <option value="ET">🇪🇹 إثيوبيا</option>
+                                        <option value="FJ">🇫🇯 فيجي</option>
+                                        <option value="FI">🇫🇮 فنلندا</option>
+                                        <option value="FR">🇫🇷 فرنسا</option>
+                                        <option value="GA">🇬🇦 الغابون</option>
+                                        <option value="GM">🇬🇲 غامبيا</option>
+                                        <option value="GE">🇬🇪 جورجيا</option>
+                                        <option value="DE">🇩🇪 ألمانيا</option>
+                                        <option value="GH">🇬🇭 غانا</option>
+                                        <option value="GR">🇬🇷 اليونان</option>
+                                        <option value="GD">🇬🇩 غرينادا</option>
+                                        <option value="GT">🇬🇹 غواتيمالا</option>
+                                        <option value="GN">🇬🇳 غينيا</option>
+                                        <option value="GW">🇬🇼 غينيا بيساو</option>
+                                        <option value="GY">🇬🇾 غيانا</option>
+                                        <option value="HT">🇭🇹 هايتي</option>
+                                        <option value="HN">🇭🇳 هندوراس</option>
+                                        <option value="HU">🇭🇺 المجر</option>
+                                        <option value="IS">🇮🇸 آيسلندا</option>
+                                        <option value="IN">🇮🇳 الهند</option>
+                                        <option value="ID">🇮🇩 إندونيسيا</option>
+                                        <option value="IR">🇮🇷 إيران</option>
+                                        <option value="IQ">🇮🇶 العراق</option>
+                                        <option value="IE">🇮🇪 أيرلندا</option>
+                                        <option value="IL">🇮🇱 إسرائيل</option>
+                                        <option value="IT">🇮🇹 إيطاليا</option>
+                                        <option value="JM">🇯🇲 جامايكا</option>
+                                        <option value="JP">🇯🇵 اليابان</option>
+                                        <option value="JO">🇯🇴 الأردن</option>
+                                        <option value="KZ">🇰🇿 كازاخستان</option>
+                                        <option value="KE">🇰🇪 كينيا</option>
+                                        <option value="KI">🇰🇮 كيريباتي</option>
+                                        <option value="KP">🇰🇵 كوريا الشمالية</option>
+                                        <option value="KR">🇰🇷 كوريا الجنوبية</option>
+                                        <option value="KW">🇰🇼 الكويت</option>
+                                        <option value="KG">🇰🇬 قيرغيزستان</option>
+                                        <option value="LA">🇱🇦 لاوس</option>
+                                        <option value="LV">🇱🇻 لاتفيا</option>
+                                        <option value="LB">🇱🇧 لبنان</option>
+                                        <option value="LS">🇱🇸 ليسوتو</option>
+                                        <option value="LR">🇱🇷 ليبيريا</option>
+                                        <option value="LY">🇱🇾 ليبيا</option>
+                                        <option value="LI">🇱🇮 ليختنشتاين</option>
+                                        <option value="LT">🇱🇹 ليتوانيا</option>
+                                        <option value="LU">🇱🇺 لوكسمبورغ</option>
+                                        <option value="MK">🇲🇰 مقدونيا الشمالية</option>
+                                        <option value="MG">🇲🇬 مدغشقر</option>
+                                        <option value="MW">🇲🇼 ملاوي</option>
+                                        <option value="MY">🇲🇾 ماليزيا</option>
+                                        <option value="MV">🇲🇻 جزر المالديف</option>
+                                        <option value="ML">🇲🇱 مالي</option>
+                                        <option value="MT">🇲🇹 مالطا</option>
+                                        <option value="MH">🇲🇭 جزر مارشال</option>
+                                        <option value="MR">🇲🇷 موريتانيا</option>
+                                        <option value="MU">🇲🇺 موريشيوس</option>
+                                        <option value="MX">🇲🇽 المكسيك</option>
+                                        <option value="FM">🇫🇲 ميكرونيزيا</option>
+                                        <option value="MD">🇲🇩 مولدوفا</option>
+                                        <option value="MC">🇲🇨 موناكو</option>
+                                        <option value="MN">🇲🇳 منغوليا</option>
+                                        <option value="ME">🇲🇪 الجبل الأسود</option>
+                                        <option value="MA">🇲🇦 المغرب</option>
+                                        <option value="MZ">🇲🇿 موزمبيق</option>
+                                        <option value="MM">🇲🇲 ميانمار</option>
+                                        <option value="NA">🇳🇦 ناميبيا</option>
+                                        <option value="NR">🇳🇷 ناورو</option>
+                                        <option value="NP">🇳🇵 نيبال</option>
+                                        <option value="NL">🇳🇱 هولندا</option>
+                                        <option value="NZ">🇳🇿 نيوزيلندا</option>
+                                        <option value="NI">🇳🇮 نيكاراغوا</option>
+                                        <option value="NE">🇳🇪 النيجر</option>
+                                        <option value="NG">🇳🇬 نيجيريا</option>
+                                        <option value="NO">🇳🇴 النرويج</option>
+                                        <option value="OM">🇴🇲 عمان</option>
+                                        <option value="PK">🇵🇰 باكستان</option>
+                                        <option value="PW">🇵🇼 بالاو</option>
+                                        <option value="PS">🇵🇸 فلسطين</option>
+                                        <option value="PA">🇵🇦 بنما</option>
+                                        <option value="PG">🇵🇬 بابوا غينيا الجديدة</option>
+                                        <option value="PY">🇵🇾 باراغواي</option>
+                                        <option value="PE">🇵🇪 بيرو</option>
+                                        <option value="PH">🇵🇭 الفلبين</option>
+                                        <option value="PL">🇵🇱 بولندا</option>
+                                        <option value="PT">🇵🇹 البرتغال</option>
+                                        <option value="QA">🇶🇦 قطر</option>
+                                        <option value="RO">🇷🇴 رومانيا</option>
+                                        <option value="RU">🇷🇺 روسيا</option>
+                                        <option value="RW">🇷🇼 رواندا</option>
+                                        <option value="KN">🇰🇳 سانت كيتس ونيفيس</option>
+                                        <option value="LC">🇱🇨 سانت لوسيا</option>
+                                        <option value="VC">🇻🇨 سانت فنسنت والغرينادين</option>
+                                        <option value="WS">🇼🇸 ساموا</option>
+                                        <option value="SM">🇸🇲 سان مارينو</option>
+                                        <option value="ST">🇸🇹 ساو تومي وبرينسيبي</option>
+                                        <option value="SA">🇸🇦 المملكة العربية السعودية</option>
+                                        <option value="SN">🇸🇳 السنغال</option>
+                                        <option value="RS">🇷🇸 صربيا</option>
+                                        <option value="SC">🇸🇨 سيشل</option>
+                                        <option value="SL">🇸🇱 سيراليون</option>
+                                        <option value="SG">🇸🇬 سنغافورة</option>
+                                        <option value="SK">🇸🇰 سلوفاكيا</option>
+                                        <option value="SI">🇸🇮 سلوفينيا</option>
+                                        <option value="SB">🇸🇧 جزر سليمان</option>
+                                        <option value="SO">🇸🇴 الصومال</option>
+                                        <option value="ZA">🇿🇦 جنوب أفريقيا</option>
+                                        <option value="SS">🇸🇸 جنوب السودان</option>
+                                        <option value="ES">🇪🇸 إسبانيا</option>
+                                        <option value="LK">🇱🇰 سريلانكا</option>
+                                        <option value="SD">🇸🇩 السودان</option>
+                                        <option value="SR">🇸🇷 سورينام</option>
+                                        <option value="SZ">🇸🇿 إسواتيني</option>
+                                        <option value="SE">🇸🇪 السويد</option>
+                                        <option value="CH">🇨🇭 سويسرا</option>
+                                        <option value="SY">🇸🇾 سوريا</option>
+                                        <option value="TW">🇹🇼 تايوان</option>
+                                        <option value="TJ">🇹🇯 طاجيكستان</option>
+                                        <option value="TZ">🇹🇿 تنزانيا</option>
+                                        <option value="TH">🇹🇭 تايلاند</option>
+                                        <option value="TL">🇹🇱 تيمور الشرقية</option>
+                                        <option value="TG">🇹🇬 توغو</option>
+                                        <option value="TO">🇹🇴 تونغا</option>
+                                        <option value="TT">🇹🇹 ترينيداد وتوباغو</option>
+                                        <option value="TN">🇹🇳 تونس</option>
+                                        <option value="TR">🇹🇷 تركيا</option>
+                                        <option value="TM">🇹🇲 تركمانستان</option>
+                                        <option value="TV">🇹🇻 توفالو</option>
+                                        <option value="UG">🇺🇬 أوغندا</option>
+                                        <option value="UA">🇺🇦 أوكرانيا</option>
+                                        <option value="AE">🇦🇪 الإمارات العربية المتحدة</option>
+                                        <option value="GB">🇬🇧 المملكة المتحدة</option>
+                                        <option value="US">🇺🇸 الولايات المتحدة الأمريكية</option>
+                                        <option value="UY">🇺🇾 أوروغواي</option>
+                                        <option value="UZ">🇺🇿 أوزبكستان</option>
+                                        <option value="VU">🇻🇺 فانواتو</option>
+                                        <option value="VA">🇻🇦 الفاتيكان</option>
+                                        <option value="VE">🇻🇪 فنزويلا</option>
+                                        <option value="VN">🇻🇳 فيتنام</option>
+                                        <option value="YE">🇾🇪 اليمن</option>
+                                        <option value="ZM">🇿🇲 زامبيا</option>
+                                        <option value="ZW">🇿🇼 زيمبابوي</option>
+                                    </select>
+                                    <i class="fas fa-globe input-icon"></i>
+                                </div>
+                                <div class="error-message" id="countryError"></div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="email" class="form-control" id="email" placeholder="البريد الإلكتروني" required>
+                                    <i class="fas fa-envelope input-icon"></i>
+                                </div>
+                                <div class="error-message" id="emailError"></div>
+                            </div>
+
+                            <!-- Terms and Conditions -->
+                            <div class="form-group">
+                                <div class="form-check custom-checkbox">
+                                    <input type="checkbox" class="form-check-input" id="termsCheck" required>
+                                    <label class="form-check-label" for="termsCheck">
+                                        أوافق على <a href="#" class="terms-link" id="termsLink">الشروط والأحكام</a>
+                                    </label>
+                                </div>
+                                <div class="error-message" id="termsError"></div>
+                            </div>
+
+                            <button type="submit" class="btn btn-register" id="registerBtn" disabled>
+                                إنشاء حساب جديد
+                            </button>
+                        </form>
+
+                                <!-- Login Link -->
+                        <div class="login-link">
+                            لديك حساب بالفعل؟ <a href="arabic_login_page.html" id="loginLink">تسجيل الدخول</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password toggle functionality
+        function setupPasswordToggle(inputId, toggleId) {
+            const toggleIcon = document.getElementById(toggleId);
+            const passwordInput = document.getElementById(inputId);
+
+            toggleIcon.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                    toggleIcon.classList.add('active');
+                    toggleIcon.title = 'إخفاء كلمة المرور';
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                    toggleIcon.classList.remove('active');
+                    toggleIcon.title = 'إظهار كلمة المرور';
+                }
+            });
+        }
+
+        // Setup password toggles
+        setupPasswordToggle('password', 'passwordToggle');
+        setupPasswordToggle('confirmPassword', 'confirmPasswordToggle');
+
+        // Track if field has been touched
+        const fieldTouched = {
+            firstName: false,
+            lastName: false,
+            password: false,
+            confirmPassword: false,
+            email: false,
+            country: false,
+            terms: false
+        };
+
+        // Password validation pattern - simple pattern requiring 8 chars and at least one number
+        const passwordPattern = /^(?=.*\d).{8,}$/;
+
+        // Expressive error messages in Arabic
+        const errorMessages = {
+            firstName: {
+                empty: 'من فضلك أدخل اسمك الأول لنتمكن من التعرف عليك بشكل صحيح',
+                invalid: 'الاسم الأول يجب أن يحتوي على حروف فقط ولا يقل عن حرفين'
+            },
+            lastName: {
+                empty: 'اسم العائلة مطلوب لإكمال بياناتك الشخصية بالشكل المناسب',
+                invalid: 'اسم العائلة يجب أن يحتوي على حروف فقط ولا يقل عن حرفين'
+            },
+            password: {
+                empty: 'كلمة المرور مطلوبة',
+                invalid: 'يجب أن تحتوي كلمة المرور على 8 أحرف على الأقل، وتتضمن رقماً واحداً على الأقل'
+            },
+            confirmPassword: {
+                empty: 'يرجى تأكيد كلمة المرور',
+                mismatch: 'كلمتا المرور غير متطابقتين'
+            },
+            email: {
+                empty: 'البريد الإلكتروني مطلوب',
+                invalid: 'يرجى إدخال بريد إلكتروني صحيح'
+            },
+            country: {
+                empty: 'يرجى اختيار الدولة'
+            },
+            terms: {
+                empty: 'يجب الموافقة على الشروط والأحكام للمتابعة'
+            }
+        };
+
+        // Show/hide error messages
+        function showError(fieldId, fieldType, validationResult) {
+            const errorDiv = document.getElementById(fieldId + 'Error');
+            if (errorDiv && errorMessages[fieldType] && errorMessages[fieldType][validationResult]) {
+                errorDiv.textContent = errorMessages[fieldType][validationResult];
+                errorDiv.classList.add('show');
+            }
+        }
+
+        function hideError(fieldId) {
+            const errorDiv = document.getElementById(fieldId + 'Error');
+            if (errorDiv) {
+                errorDiv.textContent = '';
+                errorDiv.classList.remove('show');
+            }
+        }
+
+        // Validation functions
+        function validateName(name) {
+            if (!name || name.trim().length === 0) return 'empty';
+            const namePattern = /^[a-zA-Zأ-ي\s]{2,}$/;
+            return namePattern.test(name.trim()) ? 'valid' : 'invalid';
+        }
+
+        function validateEmail(email) {
+            if (!email || email.trim().length === 0) return 'empty';
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailPattern.test(email) ? 'valid' : 'invalid';
+        }
+
+        function validatePassword(password) {
+            if (!password || password.trim().length === 0) return 'empty';
+            return passwordPattern.test(password) ? 'valid' : 'invalid';
+        }
+
+        function validateConfirmPassword(confirmPassword) {
+            if (!confirmPassword || confirmPassword.trim().length === 0) return 'empty';
+            const password = document.getElementById('password').value;
+            return confirmPassword === password ? 'valid' : 'mismatch';
+        }
+
+        function validateCountry(country) {
+            return country ? 'valid' : 'empty';
+        }
+
+        // Validate individual field and update UI
+        function validateField(fieldId, validationFn, fieldType) {
+            const field = document.getElementById(fieldId);
+            const value = field.type === 'checkbox' ? field.checked : field.value;
+            const validationResult = validationFn(value);
+            const isValid = validationResult === 'valid';
+
+            // Update visual state
+            field.classList.remove('is-valid', 'is-invalid');
+            if (fieldTouched[fieldType]) {
+                field.classList.add(isValid ? 'is-valid' : 'is-invalid');
+                if (!isValid) {
+                    showError(fieldId, fieldType, validationResult);
+                } else {
+                    hideError(fieldId);
+                }
+            }
+
+            return isValid;
+        }
+
+        // Check all fields and update register button state
+        function validateForm() {
+            const isFirstNameValid = validateField('firstName', validateName, 'firstName');
+            const isLastNameValid = validateField('lastName', validateName, 'lastName');
+            const isPasswordValid = validateField('password', validatePassword, 'password');
+            const isConfirmPasswordValid = validateField('confirmPassword', validateConfirmPassword, 'confirmPassword');
+            const isEmailValid = validateField('email', validateEmail, 'email');
+            const isCountryValid = validateField('countryCode', validateCountry, 'country');
+            const isTermsChecked = document.getElementById('termsCheck').checked;
+
+            const isFormValid = isFirstNameValid && 
+                              isLastNameValid && 
+                              isPasswordValid && 
+                              isConfirmPasswordValid && 
+                              isEmailValid && 
+                              isCountryValid && 
+                              isTermsChecked;
+
+            document.getElementById('registerBtn').disabled = !isFormValid;
+            return isFormValid;
+        }
+
+        // Add event listeners
+        const formFields = ['firstName', 'lastName', 'password', 'confirmPassword', 'email', 'countryCode'];
+        formFields.forEach(fieldId => {
+            const element = document.getElementById(fieldId);
+            if (element) {
+                element.addEventListener('input', () => {
+                    fieldTouched[fieldId === 'countryCode' ? 'country' : fieldId] = true;
+                    validateForm();
+                });
+
+                element.addEventListener('blur', () => {
+                    fieldTouched[fieldId === 'countryCode' ? 'country' : fieldId] = true;
+                    validateForm();
+                });
+            }
+        });
+
+        // Terms checkbox event listener
+        document.getElementById('termsCheck').addEventListener('change', () => {
+            fieldTouched.terms = true;
+            validateForm();
+        });
+
+        // Form submit handler
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Mark all fields as touched
+            Object.keys(fieldTouched).forEach(key => fieldTouched[key] = true);
+            
+            if (validateForm()) {
+                // Here you would typically send the data to your server
+                console.log('Form is valid, ready to submit');
+                // You can add your form submission logic here
+            }
+        });
+    </script>
+</body>
+</html>
