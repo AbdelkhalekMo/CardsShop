@@ -1,3 +1,86 @@
-<p>
-  header works!
-</p>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <i class="fas fa-gamepad"></i>
+      <span>{{ texts.storeName }}</span>
+    </a>
+
+    <!-- Navigation Items -->
+    <div class="nav-items">
+      <!-- Category Dropdown -->
+      <div class="category-dropdown">
+        <button class="category-btn" (click)="toggleCategoryDropdown($event)">
+          <span>{{ texts.categories }}</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu" [class.show]="showCategoryDropdown">
+          <a href="#" class="dropdown-item">{{ texts.giftCards }}</a>
+          <a href="#" class="dropdown-item">{{ texts.games }}</a>
+          <a href="#" class="dropdown-item">{{ texts.software }}</a>
+          <a href="#" class="dropdown-item">{{ texts.payment }}</a>
+        </div>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="search-container">
+        <input type="text" class="search-input" [placeholder]="texts.searchPlaceholder">
+        <i class="fas fa-search search-icon"></i>
+      </div>
+    </div>
+
+    <!-- Right Side Items -->
+    <div class="nav-right">
+      <!-- Region/Language Button -->
+      <button class="region-btn" (click)="openModal()">
+        <i class="fas fa-globe"></i>
+        <span>{{ texts.lang }}</span>
+      </button>
+
+      <!-- Login Button -->
+      <a [routerLink]="['/auth/login']" class="login-btn">
+        <i class="fas fa-user"></i>
+        <span>{{ texts.login }}</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Regional Settings Modal -->
+<div class="modal-overlay" [class.show]="showModal" (click)="closeModalOnOverlay($event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 class="modal-title">{{ texts.modalTitle }}</h2>
+      <button class="close-btn" (click)="closeModal()">&times;</button>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">{{ texts.region }}</label>
+      <select class="form-select" [(ngModel)]="selectedRegion">
+        <option value="global">{{ currentLanguage === 'ar' ? 'عالمي' : 'Global' }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">{{ texts.language }}</label>
+      <select class="form-select" [(ngModel)]="selectedLanguage">
+        <option value="ar">{{ currentLanguage === 'ar' ? 'العربية' : 'Arabic' }}</option>
+        <option value="en">{{ currentLanguage === 'ar' ? 'الإنجليزية' : 'English' }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">{{ texts.currency }}</label>
+      <select class="form-select" [(ngModel)]="selectedCurrency">
+        <option value="egp">{{ currentLanguage === 'ar' ? 'جنيه مصري (EGP)' : 'Egyptian Pound (EGP)' }}</option>
+        <option value="usd">{{ currentLanguage === 'ar' ? 'دولار أمريكي (USD)' : 'US Dollar (USD)' }}</option>
+        <option value="sar">{{ currentLanguage === 'ar' ? 'ريال سعودي (SAR)' : 'Saudi Riyal (SAR)' }}</option>
+        <option value="qar">{{ currentLanguage === 'ar' ? 'ريال قطري (QAR)' : 'Qatari Riyal (QAR)' }}</option>
+        <option value="aed">{{ currentLanguage === 'ar' ? 'درهم إماراتي (AED)' : 'UAE Dirham (AED)' }}</option>
+      </select>
+    </div>
+
+    <button class="save-btn" (click)="saveSettings()">{{ texts.save }}</button>
+  </div>
+</div>

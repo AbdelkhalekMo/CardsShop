@@ -1,0 +1,160 @@
+<div class="container-fluid" dir="rtl">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 d-flex align-items-center justify-content-center min-vh-100">
+            <div class="register-container">
+                <div class="register-card">
+                    <!-- Logo Section -->
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h2 class="welcome-title">انضم إلينا الآن</h2>
+                        <p class="welcome-subtitle">أنشئ حسابك الجديد للاستمتاع بأفضل أسعار البطاقات</p>
+                    </div>
+
+                    <!-- Register Form -->
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <!-- Name Fields -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" 
+                                           class="form-control" 
+                                           formControlName="firstName"
+                                           placeholder="الاسم الأول"
+                                           [class.is-invalid]="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+                                    <i class="fas fa-user input-icon"></i>
+                                </div>
+                                @if (registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched) {
+                                    <small class="text-danger">الاسم الأول مطلوب (حرفين على الأقل)</small>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input type="text" 
+                                           class="form-control" 
+                                           formControlName="lastName"
+                                           placeholder="اسم العائلة"
+                                           [class.is-invalid]="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+                                    <i class="fas fa-user input-icon"></i>
+                                </div>
+                                @if (registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched) {
+                                    <small class="text-danger">اسم العائلة مطلوب (حرفين على الأقل)</small>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <input type="email" 
+                                       class="form-control" 
+                                       formControlName="email"
+                                       placeholder="البريد الإلكتروني"
+                                       [class.is-invalid]="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+                                <i class="fas fa-envelope input-icon"></i>
+                            </div>
+                            @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+                                <small class="text-danger">يرجى إدخال بريد إلكتروني صحيح</small>
+                            }
+                        </div>
+
+                        <!-- Password Fields -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input [type]="showPassword ? 'text' : 'password'"
+                                           class="form-control"
+                                           formControlName="password"
+                                           placeholder="كلمة المرور"
+                                           [class.is-invalid]="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <i class="fas password-toggle"
+                                       [class.fa-eye]="!showPassword"
+                                       [class.fa-eye-slash]="showPassword"
+                                       [class.active]="showPassword"
+                                       (click)="togglePasswordVisibility('password')"
+                                       [title]="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'">
+                                    </i>
+                                </div>
+                                @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+                                    <small class="text-danger">كلمة المرور يجب أن تكون 6 أحرف على الأقل</small>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <input [type]="showConfirmPassword ? 'text' : 'password'"
+                                           class="form-control"
+                                           formControlName="confirmPassword"
+                                           placeholder="تأكيد كلمة المرور"
+                                           [class.is-invalid]="(registerForm.get('confirmPassword')?.invalid || registerForm.hasError('mismatch')) && registerForm.get('confirmPassword')?.touched">
+                                    <i class="fas fa-lock input-icon"></i>
+                                    <i class="fas password-toggle"
+                                       [class.fa-eye]="!showConfirmPassword"
+                                       [class.fa-eye-slash]="showConfirmPassword"
+                                       [class.active]="showConfirmPassword"
+                                       (click)="togglePasswordVisibility('confirmPassword')"
+                                       [title]="showConfirmPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'">
+                                    </i>
+                                </div>
+                                @if ((registerForm.get('confirmPassword')?.invalid || registerForm.hasError('mismatch')) && registerForm.get('confirmPassword')?.touched) {
+                                    <small class="text-danger">كلمات المرور غير متطابقة</small>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Country Selection -->
+                        <div class="form-group">
+                            <div class="input-wrapper">
+                                <select class="form-control" 
+                                        formControlName="country"
+                                        [class.is-invalid]="registerForm.get('country')?.invalid && registerForm.get('country')?.touched">
+                                    <option value="">اختر الدولة</option>
+                                    <option value="EG">🇪🇬 مصر</option>
+                                    <option value="SA">🇸🇦 السعودية</option>
+                                    <option value="AE">🇦🇪 الإمارات</option>
+                                    <option value="KW">🇰🇼 الكويت</option>
+                                    <option value="QA">🇶🇦 قطر</option>
+                                </select>
+                                <i class="fas fa-globe input-icon"></i>
+                            </div>
+                            @if (registerForm.get('country')?.invalid && registerForm.get('country')?.touched) {
+                                <small class="text-danger">يرجى اختيار الدولة</small>
+                            }
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-group">
+                            <div class="form-check custom-checkbox">
+                                <input class="form-check-input" 
+                                       type="checkbox" 
+                                       formControlName="terms" 
+                                       id="termsCheck"
+                                       [class.is-invalid]="registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched">
+                                <label class="form-check-label" for="termsCheck">
+                                    أوافق على <a href="#" class="terms-link">الشروط والأحكام</a>
+                                </label>
+                            </div>
+                            @if (registerForm.get('terms')?.invalid && registerForm.get('terms')?.touched) {
+                                <small class="text-danger">يجب الموافقة على الشروط والأحكام للمتابعة</small>
+                            }
+                        </div>
+
+                        <button type="submit" 
+                                class="btn btn-register"
+                                [disabled]="registerForm.invalid">
+                            إنشاء حساب جديد
+                        </button>
+                    </form>
+
+                    <!-- Login Link -->
+                    <div class="login-link">
+                        لديك حساب بالفعل؟ <a [routerLink]="['/auth/login']">تسجيل الدخول</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

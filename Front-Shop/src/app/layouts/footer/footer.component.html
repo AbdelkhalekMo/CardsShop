@@ -1,3 +1,86 @@
-<p>
-  footer works!
-</p>
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <!-- Company Info -->
+      <div class="footer-section">
+        <div class="footer-logo">
+          <i class="fas fa-gamepad"></i>
+          <span> {{ texts.company }} </span>
+        </div>
+        <div class="footer-contact">
+          <p>{{ texts.email }}</p>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-link">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h3>{{ texts.quickLinks }}</h3>
+        <ul>
+          <li><a href="#">{{ texts.home }}</a></li>
+          <li><a href="#">{{ texts.features }}</a></li>
+          <li><a href="#">{{ texts.howItWorks }}</a></li>
+          <li><a href="#">{{ texts.contact }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div class="footer-section">
+        <h3>{{ texts.legal }}</h3>
+        <ul>
+          <li><a href="#">{{ texts.terms }}</a></li>
+          <li><a href="#">{{ texts.privacy }}</a></li>
+          <li><a href="#">{{ texts.refund }}</a></li>
+          <li><a href="#">{{ texts.cookies }}</a></li>
+        </ul>
+      </div>
+
+      <!-- Payment Methods -->
+      <div class="footer-section">
+        <h3>{{ texts.payment }}</h3>
+        <div class="payment-gateways">
+          <div class="payment-card">
+            <i class="fab fa-paypal"></i>
+            <span>PayPal</span>
+          </div>
+          <div class="payment-card">
+            <i class="fab fa-stripe"></i>
+            <span>Stripe</span>
+          </div>
+          <div class="payment-card">
+            <i class="fab fa-cc-visa"></i>
+            <span>Visa</span>
+          </div>
+          <div class="payment-card">
+            <i class="fab fa-cc-mastercard"></i>
+            <span>Mastercard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p>{{ texts.allRights }}</p>
+      </div>
+      <div class="footer-bottom-right">
+        <p>{{ texts.designedBy }} <a href="#"> عبدالخالق </a></p>
+      </div>
+    </div>
+  </div>
+</footer>

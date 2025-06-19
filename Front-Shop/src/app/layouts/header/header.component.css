@@ -1,0 +1,456 @@
+/* RTL Styles */
+:host.rtl {
+  direction: rtl;
+}
+
+:host.rtl .navbar-container {
+  direction: rtl;
+}
+
+:host.rtl .search-icon {
+  left: auto;
+  right: 1rem;
+}
+
+:host.rtl .search-input {
+  padding-left: 1rem;
+  padding-right: 3rem;
+}
+
+:host.rtl .dropdown-menu {
+  right: auto;
+  left: 0;
+}
+
+:host.rtl .dropdown-item:hover {
+  transform: translateX(5px);
+}
+
+/* LTR Styles */
+:host.ltr {
+  direction: ltr;
+}
+
+:host.ltr .navbar-container {
+  direction: ltr;
+}
+
+:host.ltr .search-icon {
+  right: auto;
+  left: 1rem;
+}
+
+:host.ltr .search-input {
+  padding-right: 1rem;
+  padding-left: 3rem;
+}
+
+:host.ltr .dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+:host.ltr .dropdown-item:hover {
+  transform: translateX(-5px);
+}
+
+:host.ltr .logo {
+  flex-direction: row;
+}
+
+:host.ltr .category-btn {
+  flex-direction: row;
+}
+
+:host.ltr .region-btn {
+  flex-direction: row;
+}
+
+:host.ltr .login-btn {
+  flex-direction: row;
+}
+
+/* Navbar Styles */
+.navbar {
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 4px solid #007bff;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+}
+
+.navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* Logo Styles */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo i {
+  font-size: 2rem;
+  color: #00d4ff;
+}
+
+/* Navigation Items - Centered */
+.nav-items {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+  justify-content: center;
+  margin: 0 2rem;
+}
+
+/* Category Dropdown */
+.category-dropdown {
+  position: relative;
+}
+
+.category-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border: 2px solid #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.category-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1001;
+  margin-top: 0.5rem;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  padding: 1rem 1.5rem;
+  color: #333;
+  text-decoration: none;
+  display: block;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 123, 255, 0.1);
+  font-weight: 500;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.dropdown-item:hover {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  transform: translateX(-5px);
+}
+
+/* Search Bar */
+.search-container {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  padding-left: 3rem;
+  border: 2px solid #007bff;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+  background: white;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #007bff;
+}
+
+/* Right Side Items */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Language/Region Button */
+.region-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #007bff;
+  color: #007bff;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.region-btn:hover {
+  background: rgba(0, 123, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Login Button */
+.login-btn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  border: 2px solid #28a745;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.login-btn:hover {
+  background: linear-gradient(135deg, #218838, #1e7e34);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+}
+
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(5px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 999999 !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: all 0.3s ease !important;
+}
+
+.modal-overlay.show {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.modal {
+  background: white !important;
+  border-radius: 16px !important;
+  padding: 2rem !important;
+  width: 90% !important;
+  max-width: 500px !important;
+  border: 3px solid #007bff !important;
+  box-shadow: 0 20px 60px rgba(0, 123, 255, 0.3) !important;
+  transform: scale(0.9) !important;
+  transition: all 0.3s ease !important;
+  position: relative !important;
+  z-index: 1000000 !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
+  display: block !important;
+}
+
+.modal-overlay.show .modal {
+  transform: scale(1) !important;
+}
+
+/* Ensure all modal content is visible */
+.modal * {
+  color: #333 !important;
+  font-family: inherit !important;
+}
+
+.modal-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 2rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 2px solid #007bff !important;
+}
+
+.modal-title {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  color: #333 !important;
+}
+
+.close-btn {
+  background: none !important;
+  border: none !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
+  color: #666 !important;
+  transition: color 0.3s ease !important;
+}
+
+.close-btn:hover {
+  color: #007bff !important;
+}
+
+.form-group {
+  margin-bottom: 1.5rem !important;
+}
+
+.form-label {
+  display: block !important;
+  margin-bottom: 0.5rem !important;
+  font-weight: 600 !important;
+  color: #333 !important;
+}
+
+.form-select {
+  width: 100% !important;
+  padding: 0.75rem !important;
+  border: 2px solid #ddd !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  background: white !important;
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+.form-select:focus {
+  border-color: #007bff !important;
+  outline: none !important;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2) !important;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+  color: white !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3) !important;
+}
+
+.save-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #004085) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-items {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+    margin: 0;
+  }
+
+  .search-container {
+    max-width: 100%;
+  }
+
+  .nav-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* RTL/LTR Mobile Adjustments */
+  :host.rtl .nav-items {
+    direction: rtl;
+  }
+
+  :host.ltr .nav-items {
+    direction: ltr;
+  }
+}
+
+/* Additional RTL/LTR Specific Styles */
+:host.rtl .modal {
+  text-align: right;
+}
+
+:host.ltr .modal {
+  text-align: left;
+}
+
+:host.rtl .modal-header {
+  direction: rtl;
+}
+
+:host.ltr .modal-header {
+  direction: ltr;
+}
+
+:host.rtl .form-group {
+  text-align: right;
+}
+
+:host.ltr .form-group {
+  text-align: left;
+}
