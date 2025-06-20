@@ -46,7 +46,7 @@ export class FooterComponent implements OnDestroy {
       cookies: 'Cookie Policy',
       payment: 'Payment Methods',
       rights: 'All rights reserved.',
-      designedBy: 'Designed by',
+      designedBy: 'Designed by ',
       company: 'UpCodea',
       email: 'support@upcodea.com',
       allRights: '© 2025 UpCodea. All rights reserved.'
