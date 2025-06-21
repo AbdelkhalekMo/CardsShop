@@ -1,0 +1,27 @@
+<div class="category-main-container">
+      <div class="header">
+        <h2 class="title">{{ categoryTitle }}</h2>
+        <button class="view-all-btn" (click)="onViewAllClick()">
+          <span>{{ viewAllText }}</span>
+          <svg class="arrow-icon" 
+               [class.rtl-arrow]="isRTL"
+               width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="9,18 15,12 9,6"></polyline>
+          </svg>
+        </button>
+      </div>
+      
+      <div class="cards-grid">
+        <app-product-main-card 
+          *ngFor="let product of products; trackBy: trackByProductId" 
+          [imageUrl]="product.imageUrl"
+          [title]="product.title">
+        </app-product-main-card>
+        
+        <!-- Empty slots to maintain grid structure -->
+        <div 
+          *ngFor="let empty of emptySlots" 
+          class="empty-slot">
+        </div>
+      </div>
+    </div>

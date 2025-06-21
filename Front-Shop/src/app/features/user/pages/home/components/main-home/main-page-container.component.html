@@ -1,0 +1,13 @@
+<div class="main-page-container">
+      <div class="categories-grid">
+        <div 
+          *ngFor="let category of categories; trackBy: trackByCategoryId" 
+          class="category-wrapper">
+          <app-category-main-container
+            [categoryTitle]="category.title"
+            [products]="category.products">
+          </app-category-main-container>
+        </div>
+      </div>
+    </div>
+  

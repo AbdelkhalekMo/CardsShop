@@ -1,0 +1,113 @@
+.category-main-container {
+      width: 100%;
+      height: 100%;
+      background: rgba(235, 27, 27, 0.1);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+      height: auto;
+    }
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin: 0;
+    }
+
+    .view-all-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: #007bff;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .view-all-btn:hover {
+      background-color: #f0f8ff;
+      color: #0056b3;
+    }
+
+    .arrow-icon {
+      transition: transform 0.2s ease;
+      width: 14px;
+      height: 14px;
+    }
+
+    .view-all-btn:hover .arrow-icon {
+      transform: translateX(2px);
+    }
+
+    /* RTL arrow styling for Arabic */
+    .arrow-icon.rtl-arrow {
+      transform: scaleX(-1); /* Flip the arrow horizontally for RTL */
+    }
+
+    .view-all-btn:hover .arrow-icon.rtl-arrow {
+      transform: scaleX(-1) translateX(2px); /* Maintain flip and add hover effect */
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px 18px;
+      flex-grow: 1;
+      height: auto;
+      max-height: none;
+      align-content: start;
+      align-items: start;
+    }
+
+    .empty-slot {
+      background-color: transparent;
+      min-height: 155px;
+    }
+
+    @media (max-width: 768px) {
+      .title {
+        font-size: 18px;
+      }
+      
+      .view-all-btn {
+        font-size: 13px;
+      }
+      
+      .cards-grid {
+        gap: 16px 14px;
+      }
+      
+      .empty-slot {
+        min-height: 145px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      
+      .title {
+        font-size: 16px;
+      }
+      
+      .empty-slot {
+        min-height: 130px;
+      }
+    }

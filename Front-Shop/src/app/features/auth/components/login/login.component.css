@@ -1,7 +1,6 @@
 :host {
     display: block;
     min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
     position: relative;
     overflow-x: hidden;
 }
@@ -12,7 +11,8 @@
     z-index: 2;
     max-width: 420px;
     width: 100%;
-    margin: 0 auto;
+    margin: 30px 0 30px 0;
+    padding-top: 30px;
 }
 
 .login-card {

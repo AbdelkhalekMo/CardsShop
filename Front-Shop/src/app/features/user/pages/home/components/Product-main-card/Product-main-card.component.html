@@ -1,0 +1,13 @@
+<div class="product-main-card" (click)="onCardClick()">
+      <div class="image-container">
+        <img 
+          [src]="imageUrl" 
+          [alt]="title"
+          class="card-image"
+          (error)="onImageError($event)">
+        <div class="image-overlay"></div>
+      </div>
+      <div class="card-content">
+        <h3 class="card-title">{{ title }}</h3>
+      </div>
+    </div>
