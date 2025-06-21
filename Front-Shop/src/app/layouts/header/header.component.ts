@@ -43,6 +43,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   showCategoryDropdown = false;
   showModal = false;
+  showMobileMenu = false;
+  showMobileCategoryDropdown = false;
 
   currentLanguage: 'ar' | 'en' = 'ar';
   private langSub: Subscription;
@@ -120,6 +122,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.showCategoryDropdown = !this.showCategoryDropdown;
   }
 
+  toggleMobileMenu() {
+    this.showMobileMenu = !this.showMobileMenu;
+    if (this.showMobileMenu) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  closeMobileMenu() {
+    this.showMobileMenu = false;
+    document.body.style.overflow = 'auto';
+  }
+
+  toggleMobileCategoryDropdown() {
+    this.showMobileCategoryDropdown = !this.showMobileCategoryDropdown;
+  }
+
   openModal() {
   this.showModal = true;
   // Force re-render
@@ -155,17 +175,30 @@ closeModal() {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: Event) {
-    // Close category dropdown when clicking outside
-    if (!this.showCategoryDropdown) return;
-    
     const target = event.target as HTMLElement;
-    const categoryBtn = document.querySelector('.category-btn');
-    const categoryDropdown = document.querySelector('.dropdown-menu');
     
-    if (categoryBtn && categoryDropdown && 
-        !categoryBtn.contains(target) && 
-        !categoryDropdown.contains(target)) {
-      this.showCategoryDropdown = false;
+    // Close category dropdown when clicking outside
+    if (this.showCategoryDropdown) {
+      const categoryBtn = document.querySelector('.category-btn');
+      const categoryDropdown = document.querySelector('.dropdown-menu');
+      
+      if (categoryBtn && categoryDropdown && 
+          !categoryBtn.contains(target) && 
+          !categoryDropdown.contains(target)) {
+        this.showCategoryDropdown = false;
+      }
+    }
+
+    // Close mobile menu when clicking outside
+    if (this.showMobileMenu) {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const mobileMenu = document.querySelector('.mobile-menu');
+      
+      if (mobileToggle && mobileMenu && 
+          !mobileToggle.contains(target) && 
+          !mobileMenu.contains(target)) {
+        this.closeMobileMenu();
+      }
     }
   }
 
@@ -174,6 +207,7 @@ closeModal() {
     if (event.key === 'Escape') {
       this.showCategoryDropdown = false;
       this.showModal = false;
+      this.closeMobileMenu();
     }
   }
 }

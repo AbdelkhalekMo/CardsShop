@@ -18,8 +18,8 @@ export class ProductMainCardComponent {
   }
 
   onImageError(event: any): void {
-    // Handle image loading error
-    event.target.style.display = 'none';
-    console.warn('Failed to load image:', this.imageUrl);
+    // Handle image loading error with fallback
+    event.target.src = 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop&auto=format&q=80';
+    console.warn('Failed to load image, using fallback:', this.imageUrl);
   }
 }

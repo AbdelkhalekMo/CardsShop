@@ -1,14 +1,14 @@
 <!-- Navbar -->
 <nav class="navbar">
   <div class="navbar-container">
-    <!-- Logo -->
+    <!-- Logo - Always visible -->
     <a href="#" class="logo">
       <i class="fas fa-gamepad"></i>
       <span>{{ texts.storeName }}</span>
     </a>
 
-    <!-- Navigation Items -->
-    <div class="nav-items">
+    <!-- Desktop Navigation Items -->
+    <div class="nav-items desktop-nav">
       <!-- Category Dropdown -->
       <div class="category-dropdown">
         <button class="category-btn" (click)="toggleCategoryDropdown($event)">
@@ -30,8 +30,8 @@
       </div>
     </div>
 
-    <!-- Right Side Items -->
-    <div class="nav-right">
+    <!-- Desktop Right Side Items -->
+    <div class="nav-right desktop-nav">
       <!-- Region/Language Button -->
       <button class="region-btn" (click)="openModal()">
         <i class="fas fa-globe"></i>
@@ -43,6 +43,50 @@
         <i class="fas fa-user"></i>
         <span>{{ texts.login }}</span>
       </a>
+    </div>
+
+    <!-- Mobile Toggle Button - Top Right -->
+    <button class="mobile-toggle" (click)="toggleMobileMenu()" [class.active]="showMobileMenu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.show]="showMobileMenu">
+    <div class="mobile-menu-content">
+      <!-- Mobile Search -->
+      <div class="mobile-search-container">
+        <input type="text" class="mobile-search-input" [placeholder]="texts.searchPlaceholder">
+        <i class="fas fa-search mobile-search-icon"></i>
+      </div>
+
+      <!-- Mobile Categories -->
+      <div class="mobile-category-section">
+        <button class="mobile-category-btn" (click)="toggleMobileCategoryDropdown()">
+          <span>{{ texts.categories }}</span>
+          <i class="fas fa-chevron-down" [class.rotated]="showMobileCategoryDropdown"></i>
+        </button>
+        <div class="mobile-category-menu" [class.show]="showMobileCategoryDropdown">
+          <a href="#" class="mobile-category-item">{{ texts.giftCards }}</a>
+          <a href="#" class="mobile-category-item">{{ texts.games }}</a>
+          <a href="#" class="mobile-category-item">{{ texts.software }}</a>
+          <a href="#" class="mobile-category-item">{{ texts.payment }}</a>
+        </div>
+      </div>
+
+      <!-- Mobile Action Buttons -->
+      <div class="mobile-actions">
+        <button class="mobile-region-btn" (click)="openModal()">
+          <i class="fas fa-globe"></i>
+          <span>{{ texts.lang }}</span>
+        </button>
+        <a [routerLink]="['/auth/login']" class="mobile-login-btn" (click)="closeMobileMenu()">
+          <i class="fas fa-user"></i>
+          <span>{{ texts.login }}</span>
+        </a>
+      </div>
     </div>
   </div>
 </nav>
