@@ -45,6 +45,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showModal = false;
   showMobileMenu = false;
   showMobileCategoryDropdown = false;
+  
+  // Navbar scroll behavior
+  isNavbarVisible = true;
+  private lastScrollTop = 0;
+  private scrollTimeout: any;
 
   currentLanguage: 'ar' | 'en' = 'ar';
   private langSub: Subscription;
@@ -115,6 +120,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.langSub.unsubscribe();
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout);
+    }
   }
 
   toggleCategoryDropdown(event: Event) {
@@ -209,5 +217,25 @@ closeModal() {
       this.showModal = false;
       this.closeMobileMenu();
     }
+  }
+
+  @HostListener('window:scroll')
+  onWindowScroll() {
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Hide navbar while scrolling
+    this.isNavbarVisible = false;
+    
+    // Clear existing timeout
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout);
+    }
+    
+    // Show navbar again after scrolling stops
+    this.scrollTimeout = setTimeout(() => {
+      this.isNavbarVisible = true;
+    }, 150);
+    
+    this.lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop; // For Mobile or negative scrolling
   }
 }
