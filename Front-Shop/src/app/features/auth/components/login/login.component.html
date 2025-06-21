@@ -1,5 +1,5 @@
 <!-- Main Container with RTL Support -->
-<div class="container-fluid" dir="rtl">
+<div class="container-fluid" [attr.dir]="isRTL ? 'rtl' : 'ltr'">
     <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 d-flex align-items-center justify-content-center min-vh-100">
             <div class="login-container">
@@ -9,8 +9,8 @@
                         <div class="logo-icon">
                             <i class="fas fa-gift"></i>
                         </div>
-                        <h2 class="welcome-title">أهلاً وسهلاً بك</h2>
-                        <p class="welcome-subtitle">سجل دخولك للوصول إلى UpCodea  </p>
+                        <h2 class="welcome-title">{{ texts.welcome }}</h2>
+                        <p class="welcome-subtitle">{{ texts.subtitle }}</p>
                     </div>
 
                     <!-- Login Form -->
@@ -20,12 +20,12 @@
                                 <input type="text" 
                                        class="form-control" 
                                        formControlName="emailOrUsername" 
-                                       placeholder="الاسم أو البريد الإلكتروني"
+                                       [placeholder]="texts.emailPlaceholder"
                                        [class.is-invalid]="loginForm.get('emailOrUsername')?.invalid && loginForm.get('emailOrUsername')?.touched">
                                 <i class="fas fa-user input-icon"></i>
                             </div>
                             @if (loginForm.get('emailOrUsername')?.invalid && loginForm.get('emailOrUsername')?.touched) {
-                                <small class="text-danger">هذا الحقل مطلوب</small>
+                                <small class="text-danger">{{ texts.requiredField }}</small>
                             }
                         </div>
 
@@ -34,7 +34,7 @@
                                 <input [type]="showPassword ? 'text' : 'password'"
                                        class="form-control"
                                        formControlName="password"
-                                       placeholder="كلمة المرور"
+                                       [placeholder]="texts.passwordPlaceholder"
                                        [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
                                 <i class="fas fa-lock input-icon"></i>
                                 <i class="fas password-toggle"
@@ -42,11 +42,11 @@
                                    [class.fa-eye-slash]="showPassword"
                                    [class.active]="showPassword"
                                    (click)="togglePasswordVisibility()"
-                                   [title]="showPassword ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'">
+                                   [title]="showPassword ? texts.hidePassword : texts.showPassword">
                                 </i>
                             </div>
                             @if (loginForm.get('password')?.invalid && loginForm.get('password')?.touched) {
-                                <small class="text-danger">كلمة المرور يجب أن تكون 6 أحرف على الأقل</small>
+                                <small class="text-danger">{{ texts.passwordLength }}</small>
                             }
                         </div>
 
@@ -56,25 +56,25 @@
                                    formControlName="rememberMe" 
                                    id="rememberMe">
                             <label class="form-check-label" for="rememberMe">
-                                تذكرني في المرة القادمة
+                                {{ texts.rememberMe }}
                             </label>
                         </div>
 
                         <button type="submit" 
                                 class="btn btn-login"
                                 [disabled]="loginForm.invalid">
-                            تسجيل الدخول
+                            {{ texts.loginButton }}
                         </button>
                     </form>
 
                     <!-- Forgot Password -->
                     <div class="forgot-password">
-                        <a [routerLink]="['/auth/forgot-password']">نسيت كلمة المرور؟</a>
+                        <a [routerLink]="['/auth/forgot-password']">{{ texts.forgotPassword }}</a>
                     </div>
 
                     <!-- Signup Link -->
                     <div class="signup-link">
-                        ليس لديك حساب؟ <a [routerLink]="['/auth/register']">إنشاء حساب جديد</a>
+                        {{ texts.noAccount }} <a [routerLink]="['/auth/register']">{{ texts.createAccount }}</a>
                     </div>
                 </div>
             </div>

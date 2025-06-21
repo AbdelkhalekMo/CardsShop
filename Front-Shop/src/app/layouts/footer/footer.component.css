@@ -25,6 +25,14 @@
   margin-bottom: 2rem;
 }
 
+/* Center align the first footer section (company info) */
+.footer-section:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .footer-section h3 {
   color: #007bff;
   font-size: 1.2rem;
@@ -59,11 +67,13 @@
 .footer-logo {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   color: #007bff;
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .footer-logo i {
@@ -74,6 +84,8 @@
 .footer-contact {
   color: #b0b0b0;
   margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
 }
 
 .footer-contact a {
@@ -85,6 +97,9 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .social-link {
@@ -181,7 +196,8 @@
 }
 
 :host-context(.rtl) .footer-logo {
-  flex-direction: row-reverse;
+  justify-content: center;
+  flex-direction: row;
 }
 
 :host-context(.rtl) .footer-bottom {
@@ -196,12 +212,21 @@
   flex-direction: row-reverse;
 }
 
+:host-context(.rtl) .footer-contact {
+  text-align: center;
+}
+
+:host-context(.rtl) .social-links {
+  justify-content: center;
+}
+
 /* LTR Styles */
 :host-context(.ltr) .footer-section ul li a:hover {
   transform: translateX(-5px);
 }
 
 :host-context(.ltr) .footer-logo {
+  justify-content: center;
   flex-direction: row;
 }
 
@@ -215,6 +240,14 @@
 
 :host-context(.ltr) .payment-card {
   flex-direction: row;
+}
+
+:host-context(.ltr) .footer-contact {
+  text-align: center;
+}
+
+:host-context(.ltr) .social-links {
+  justify-content: center;
 }
 
 /* Responsive Footer */
@@ -239,7 +272,6 @@
 
   .payment-gateways {
     grid-template-columns: 1fr;
-    justify-content: center;
   }
 
   .social-links {

@@ -96,6 +96,28 @@
     height: 45px;
 }
 
+/* RTL form control padding adjustments */
+[dir="rtl"] .form-control {
+    padding: 12px 15px 12px 45px;
+}
+
+[dir="ltr"] .form-control {
+    padding: 12px 45px 12px 15px;
+}
+
+/* Password fields need extra padding for both icons */
+[dir="rtl"] input[type="password"],
+[dir="rtl"] input[formControlName="password"],
+[dir="rtl"] input[formControlName="confirmPassword"] {
+    padding: 12px 45px 12px 45px !important;
+}
+
+[dir="ltr"] input[type="password"],
+[dir="ltr"] input[formControlName="password"],
+[dir="ltr"] input[formControlName="confirmPassword"] {
+    padding: 12px 45px 12px 45px !important;
+}
+
 .form-control:focus {
     background: rgba(255, 255, 255, 0.95);
     border-color: #00AAFF;
@@ -117,6 +139,17 @@
     font-size: 16px;
 }
 
+/* RTL input icon positioning */
+[dir="rtl"] .input-icon {
+    right: auto;
+    left: 15px;
+}
+
+[dir="ltr"] .input-icon {
+    right: 15px;
+    left: auto;
+}
+
 .password-toggle {
     position: absolute;
     top: 50%;
@@ -127,6 +160,17 @@
     cursor: pointer;
     transition: color 0.3s ease;
     z-index: 10;
+}
+
+/* RTL password toggle positioning */
+[dir="rtl"] .password-toggle {
+    left: auto;
+    right: 15px;
+}
+
+[dir="ltr"] .password-toggle {
+    left: 15px;
+    right: auto;
 }
 
 .password-toggle:hover {
