@@ -1,7 +1,7 @@
 import { Component, HostBinding, OnInit, HostListener, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { LanguageService } from '../../services/language.service';
+import { LanguageService } from '../../../../services/language.service';
 import { Subscription } from 'rxjs';
 import { RouterLink } from '@angular/router';
 
@@ -17,6 +17,7 @@ interface Translation {
   categories: string;
   searchPlaceholder: string;
   login: string;
+  register: string;
   modalTitle: string;
   region: string;
   language: string;
@@ -71,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       categories: 'الفئات',
       searchPlaceholder: 'البحث عن المنتجات...',
       login: 'تسجيل الدخول',
+      register: 'إنشاء حساب',
       modalTitle: 'الإعدادات الإقليمية',
       region: 'المنطقة',
       language: 'اللغة',
@@ -87,6 +89,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       categories: 'Categories',
       searchPlaceholder: 'Search products...',
       login: 'Login',
+      register: 'Register',
       modalTitle: 'Regional Settings',
       region: 'Region',
       language: 'Language',

@@ -1,12 +1,13 @@
 import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LanguageService } from '../../services/language.service';
+import { RouterLink } from '@angular/router';
+import { LanguageService } from '../../../../services/language.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
